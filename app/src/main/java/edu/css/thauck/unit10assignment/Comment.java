@@ -7,6 +7,7 @@ package edu.css.thauck.unit10assignment;
 public class Comment {
     private long id;            // database record id
     private String comment;     // random comment
+    private String rating;      // user rating
 
     /**
      * Get column ID
@@ -40,9 +41,27 @@ public class Comment {
         this.comment = comment;
     }
 
+    /**
+     * Get user rating
+     * @return
+     */
+    public String getRating() {
+        return rating;
+    }
+
+    /**
+     * Set user rating
+     * @param rating
+     */
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
     // Will be used by the ArrayAdapter in the ListView
     @Override
     public String toString() {
-        return comment;
+        return comment + "  " + rating;
     }
+
+
 }

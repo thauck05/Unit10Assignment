@@ -6,9 +6,11 @@ import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 
 public class MainActivity extends ListActivity {
     private CommentsDataSource datasource;
+    EditText etRatings;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -19,6 +21,7 @@ public class MainActivity extends ListActivity {
         datasource.open(); // open database
 
         List<Comment> values = datasource.getAllComments();
+        etRatings = (EditText)findViewById(R.id.rating);
 
         // use the SimpleCursorAdapter to show the elements in a ListView
         ArrayAdapter<Comment> adapter = new ArrayAdapter<Comment>(this,
@@ -35,9 +38,8 @@ public class MainActivity extends ListActivity {
             case R.id.add:
                 String[] comments = new String[] { "Cool", "Very nice", "Hate it" };
                 int nextInt = new Random().nextInt(3);
-
-                // save the new comment to the database
-                comment = datasource.createComment(comments[nextInt]);
+                // save the new comment and rating to the database
+                comment = datasource.createComment(comments[nextInt], etRatings.getText().toString());
                 adapter.add(comment);
                 break;
             case R.id.delete:
